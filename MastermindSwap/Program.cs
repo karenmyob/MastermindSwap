@@ -14,12 +14,8 @@ namespace MastermindSwap
     {
         static void Main(string[] args)
         {
-      
-                var masterMindGame = new MastermindGame();
-            masterMindGame.StartGame();
+            var mastermindGame = new MastermindGame();
+            mastermindGame.StartGame();
         }
-
-      
-
     }
 }
