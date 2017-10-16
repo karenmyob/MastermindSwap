@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="InputCleanserShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UIRendererShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MastermindSwap\MastermindSwap.csproj">

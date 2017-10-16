@@ -26,11 +26,6 @@ namespace MastermindSwap
         {
             _code = CreateCode();
 
-
-
-
-            
-
             Console.WriteLine("Enter in your guess (4 characters, r g y c w)");
             while (!_mastermind.CheckWinCondition(_mark))
             {
