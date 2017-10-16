@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CodeBreaker">
+      <HintPath>..\..\..\Users\karen.xie\Downloads\CodeBreaker.dll</HintPath>
+    </Reference>
     <Reference Include="MastermindKata">
       <HintPath>..\MastermindKata.dll</HintPath>
     </Reference>

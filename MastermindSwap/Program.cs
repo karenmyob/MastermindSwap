@@ -4,6 +4,8 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
+using CodeBreaker.UnitTests;
 using MastermindKata.Logic;
 
 namespace MastermindSwap
@@ -11,13 +13,39 @@ namespace MastermindSwap
     class Program
     {
         static void Main(string[] args)
-        {
-            MastermindKata.Logic.Mastermind mastermind = new Mastermind(new GuessValidator());
-            string secret = "r,g,y,c";
-            string guess = "r,g,y,c"; // Can only guess using rgycw
-            string mark = mastermind.ReturnMark(secret, guess);
+        {       
+            var mastermind = new Mastermind(new GuessValidator());
+            var mark = "";
+            const string code = "r,g,y,c";
 
-            Console.WriteLine(secret + " " + guess + " " + mark);
+            Console.WriteLine("Enter in your guess (4 characters, r g y c w)");
+            while (!mastermind.CheckWinCondition(mark))
+            {
+                try
+                {
+                    var input = Console.ReadLine();
+                    var guess = CleanseInput(input);
+                    mark = mastermind.ReturnMark(code, guess);
+                    Console.WriteLine(mark.Equals("") ? "----" : mark);
+                }
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                catch (IndexOutOfRangeException e)
+                {
+                    Console.WriteLine("Please enter 4 characters");
+                }       
+            }
+
+            Console.WriteLine("You win! :-)");
         }
+
+
+        public static string CleanseInput(string input)
+        {
+            return string.Join<char>(",", input.ToLower());  
+        }
+
     }
 }
