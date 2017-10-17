@@ -13,26 +13,29 @@ namespace MastermindSwap
         private string _code;
         private string _mark;
         private Mastermind _mastermind;
+        private UIRenderer _uiRenderer;
         private InputCleanser _inputCleanser;
 
-
-        public MastermindGame()
+        public MastermindGame(Mastermind codeChecker, UIRenderer uiRenderer, InputCleanser inputCleanser)
         {
-            _mastermind = new Mastermind(new GuessValidator());
-            _inputCleanser = new InputCleanser();
+            _mastermind = codeChecker;
+            _uiRenderer = uiRenderer;
+            _inputCleanser = inputCleanser;
             _mark = "";
         }
+
         public void StartGame()
         {
             _code = CreateCode();
+            _uiRenderer.PrintMessage("Enter in your guess (4 characters, r g y c w)");
 
-            Console.WriteLine("Enter in your guess (4 characters, r g y c w)");
             while (!_mastermind.CheckWinCondition(_mark))
             {
                 try
                 {
                     var input = Console.ReadLine();
                     var guess = _inputCleanser.AddCommas(input);
+
                     _mark = _mastermind.ReturnMark(_code, guess);
                     Console.WriteLine(_mark.Equals("") ? "----" : _mark);
                 }
