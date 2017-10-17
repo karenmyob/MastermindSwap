@@ -19,7 +19,7 @@ namespace MastermindSwap.UnitTests
         [Test]
         public void AddCommas()
         {
-            Assert.AreEqual("r,g,y,c", _inputCleanser.AddCommas("rgyc"));
+            Assert.AreEqual("r,g,y,c", _inputCleanser.Cleanse("rgyc"));
         }
     }
 }

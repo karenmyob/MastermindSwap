@@ -13,6 +13,7 @@ namespace MastermindSwap
     {
         static void Main(string[] args)
         {
+           
             Mastermind codeChecker = new Mastermind(new GuessValidator());
             InputCleanser inputCleanser = new InputCleanser();
             UIRenderer uiRenderer = new UIRenderer();

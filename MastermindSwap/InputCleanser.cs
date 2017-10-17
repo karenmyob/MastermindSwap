@@ -9,9 +9,15 @@ namespace MastermindSwap
 {
     public class InputCleanser
     {
-        public string AddCommas(string input)
+        public string Cleanse(string input)
         {
+            input = RemoveCommas(input);
             return string.Join<char>(",", input.ToLower());
+        }
+
+        private string RemoveCommas(string input)
+        {
+            return input.Replace(",", "");
         }
     }
 }

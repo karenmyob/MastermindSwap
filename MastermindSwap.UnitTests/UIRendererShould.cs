@@ -18,7 +18,7 @@ namespace MastermindSwap.UnitTests
             const string mark = "b,b,b,b";
             const string expected = "Guess: r,g,y,c\nMark: b,b,b,b";
 
-            var result = uiRenderer.CreateFeedbackTable(guess, mark);
+            var result = uiRenderer.CreateResults(guess, mark);
 
             Assert.AreEqual(expected, result);
         }

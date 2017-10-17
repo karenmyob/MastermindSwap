@@ -8,14 +8,24 @@ namespace MastermindSwap
 {
     public class UIRenderer
     {
-        public void PrintMessage(string message)
+        public void Render(string guess, string result, bool hasWon)
         {
-            Console.WriteLine(message);
+            var table = CreateResults(guess, result);
+            Console.WriteLine(table);
+            if (hasWon) Console.WriteLine("You win! :-)");
         }
 
-        public string CreateFeedbackTable(string guess, string mark)
+        public string CreateResults(string guess, string mark)
         {
             return "Guess: " + guess + "\n" + "Mark: " + mark;
+        }
+
+        public void RenderSecretCode(string code)
+        {
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine(code);
+            Console.ResetColor();
         }
     }
 }
