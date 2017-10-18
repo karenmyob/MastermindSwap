@@ -20,7 +20,7 @@ namespace MastermindSwap
 
             var mastermindGame = new MastermindGame(codeChecker, codeRandomiser, uiWriter, inputCleanser);
 
-            mastermindGame.StartGame();
+            mastermindGame.Run();
         }
     }
 }

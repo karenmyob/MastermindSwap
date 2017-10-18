@@ -38,19 +38,18 @@ namespace MastermindSwap
 
         private void StartGame(string code)
         {
-            var hasWon = false;
+            var result = "";
 
-            while (!hasWon)
+            while (!HasWon(result))
             {
                 var input = Console.ReadLine();
                 var guess = _inputCleanser.Cleanse(input);
 
-                var result = GetResult(code, guess);
-                hasWon = _mastermind.CheckWinCondition(result);
-
+                result = GetResult(code, guess);
                 _uiWriter.WriteResult(guess, result);
-                if (hasWon) _uiWriter.WriteWinMessage();
             }
+
+            _uiWriter.WriteWinMessage();
         }
 
         private string GetResult(string code, string guess)
@@ -67,6 +66,11 @@ namespace MastermindSwap
             {
                 return "Please enter four characters";
             }
+        }
+
+        private bool HasWon(string result)
+        {
+            return _mastermind.CheckWinCondition(result);
         }
     }
 }
