@@ -48,7 +48,8 @@ namespace MastermindSwap
                 var result = GetResult(code, guess);
                 hasWon = _mastermind.CheckWinCondition(result);
 
-                DrawUI(guess, result, hasWon);
+                _uiWriter.WriteResult(guess, result);
+                if (hasWon) _uiWriter.WriteWinMessage();
             }
         }
 
@@ -66,12 +67,6 @@ namespace MastermindSwap
             {
                 return "Please enter four characters";
             }
-        }
-
-        private void DrawUI(string guess, string result, bool hasWon)
-        {
-            _uiWriter.WriteResult(guess, result);
-            if (hasWon) _uiWriter.WriteWinMessage();
         }
     }
 }
