@@ -23,12 +23,22 @@ namespace MastermindSwap
             _codeRandomiser = codeRandomiser;
         }
 
-        public void StartGame()
+        public void Run()
         {
             var code = _codeRandomiser.CreateCode();
-            var hasWon = false;
-
             SetupGame(code);
+            StartGame(code);
+        }
+
+        private void SetupGame(string code)
+        {
+            _uiWriter.WriteSecretCode(code);
+            _uiWriter.WriteInstructions();
+        }
+
+        private void StartGame(string code)
+        {
+            var hasWon = false;
 
             while (!hasWon)
             {
@@ -40,12 +50,6 @@ namespace MastermindSwap
 
                 DrawUI(guess, result, hasWon);
             }
-        }
-
-        private void SetupGame(string code)
-        {
-            _uiWriter.WriteSecretCode(code);
-            _uiWriter.WriteInstructions();
         }
 
         private string GetResult(string code, string guess)
