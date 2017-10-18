@@ -11,32 +11,41 @@ namespace MastermindSwap
     class MastermindGame
     {
         private readonly Mastermind _mastermind;
-        private readonly UIRenderer _uiRenderer;
+        private readonly UIWriter _uiWriter;
         private readonly InputCleanser _inputCleanser;
+        private readonly CodeRandomiser _codeRandomiser;
 
-        public MastermindGame(Mastermind codeChecker, UIRenderer uiRenderer, InputCleanser inputCleanser)
+        public MastermindGame(Mastermind codeChecker, CodeRandomiser codeRandomiser, UIWriter uiWriter, InputCleanser inputCleanser)
         {
             _mastermind = codeChecker;
-            _uiRenderer = uiRenderer;
+            _uiWriter = uiWriter;
             _inputCleanser = inputCleanser;
+            _codeRandomiser = codeRandomiser;
         }
 
         public void StartGame()
         {
-            var code = CreateCode();
+            var code = _codeRandomiser.CreateCode();
             var hasWon = false;
 
-            _uiRenderer.RenderSecretCode(code);
-            Console.WriteLine("Enter in your guess (4 characters, r g y c w)");
+            SetupGame(code);
 
             while (!hasWon)
             {
                 var input = Console.ReadLine();
                 var guess = _inputCleanser.Cleanse(input);
+
                 var result = GetResult(code, guess);
                 hasWon = _mastermind.CheckWinCondition(result);
-                _uiRenderer.Render(guess, result, hasWon);
+
+                DrawUI(guess, result, hasWon);
             }
+        }
+
+        private void SetupGame(string code)
+        {
+            _uiWriter.WriteSecretCode(code);
+            _uiWriter.WriteInstructions();
         }
 
         private string GetResult(string code, string guess)
@@ -55,13 +64,10 @@ namespace MastermindSwap
             }
         }
 
-        private string CreateCode()
+        private void DrawUI(string guess, string result, bool hasWon)
         {
-            const string chars = "rgycw";
-            var random = new Random();
-            var code = new string(Enumerable.Repeat(chars, 4).Select(s => s[random.Next(s.Length)]).ToArray());
-            code = _inputCleanser.Cleanse(code);
-            return code;
+            _uiWriter.WriteResult(guess, result);
+            if (hasWon) _uiWriter.WriteWinMessage();
         }
     }
 }

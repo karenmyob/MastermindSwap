@@ -8,17 +8,17 @@ using NUnit.Framework;
 namespace MastermindSwap.UnitTests
 {
     [TestFixture]
-    public class UIRendererShould
+    public class UIWriterShould
     {
         [Test]
-        public void CreateFeedbackTable()
+        public void CreateResultsWithGuessAndMark()
         {
-            var uiRenderer = new UIRenderer();
+            var uiRenderer = new UIWriter();
             const string guess = "r,g,y,c";
             const string mark = "b,b,b,b";
             const string expected = "Guess: r,g,y,c\nMark: b,b,b,b";
 
-            var result = uiRenderer.CreateResults(guess, mark);
+            var result = uiRenderer.CreateResultMessage(guess, mark);
 
             Assert.AreEqual(expected, result);
         }

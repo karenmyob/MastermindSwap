@@ -12,12 +12,14 @@ namespace MastermindSwap
     class Program
     {
         static void Main(string[] args)
-        {
-           
-            Mastermind codeChecker = new Mastermind(new GuessValidator());
-            InputCleanser inputCleanser = new InputCleanser();
-            UIRenderer uiRenderer = new UIRenderer();
-            var mastermindGame = new MastermindGame(codeChecker, uiRenderer, inputCleanser);
+        {     
+            var codeChecker = new Mastermind(new GuessValidator());
+            var inputCleanser = new InputCleanser();
+            var uiWriter = new UIWriter();
+            var codeRandomiser = new CodeRandomiser();
+
+            var mastermindGame = new MastermindGame(codeChecker, codeRandomiser, uiWriter, inputCleanser);
+
             mastermindGame.StartGame();
         }
     }

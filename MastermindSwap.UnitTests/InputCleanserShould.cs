@@ -8,18 +8,15 @@ namespace MastermindSwap.UnitTests
     [TestFixture]
     public class InputCleanserShould
     {
-        private InputCleanser _inputCleanser;
-
-        [SetUp]
-        public void SetUp()
-        {
-            _inputCleanser = new InputCleanser();
-        }
 
         [Test]
-        public void AddCommas()
+        public void EnsureOnlySingleCommasBetweenCharacters()
         {
-            Assert.AreEqual("r,g,y,c", _inputCleanser.Cleanse("rgyc"));
+            InputCleanser inputCleanser = new InputCleanser();
+            Assert.AreEqual("r,g,y,c", inputCleanser.Cleanse("rgyc"));
+            Assert.AreEqual("r,g,y,c", inputCleanser.Cleanse("r,g,y,c"));
+            Assert.AreEqual("r,g,y,c", inputCleanser.Cleanse("r,,g,,y,,c"));
+            Assert.AreEqual("r,g,y,c", inputCleanser.Cleanse(",r,,g,,,y,c,"));
         }
     }
 }
